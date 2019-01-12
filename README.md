@@ -20,6 +20,7 @@ var ecuador = require('ecuador-postal-codes');
 - `lookupProvinces(<query>)`: Returns an array of Province objects
 - `lookupCities(<query>)`: Returns an array of City objects
 - `lookupTowns(<query>)`: Returns an array of Town objects
+- `lookupPostalCode(<query>)`: Returns a Town object that matches the postal code
 
 
 ### Search provinces example

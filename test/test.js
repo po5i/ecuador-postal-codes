@@ -39,6 +39,12 @@ describe('Public methods', () => {
       expect(province.length).to.be.equals(1);
     });
 
+    it('Search for a invalid province', () => {
+      const province = ecuador.data.lookupProvinces('XXX');
+
+      expect(province.length).to.be.equals(0);
+    });
+
     it('Search for a Guayaquil city from province', () => {
       const province = ecuador.data.lookupProvinces('GUAYAS')[0];
       const city = province.lookupCities('Guayaquil')[0];
@@ -54,6 +60,13 @@ describe('Public methods', () => {
       expect(city.province).to.have.property('name', 'GUAYAS');
     });
 
+    it('Search for a invalid city from province', () => {
+      const province = ecuador.data.lookupProvinces('GUAYAS')[0];
+      const city = province.lookupCities('XXXX');
+
+      expect(city.length).to.be.equals(0);
+    });
+
     it('Search for a Tarqui town from city', () => {
       const province = ecuador.data.lookupProvinces('GUAYAS')[0];
       const city = province.lookupCities('Guayaquil')[0];
@@ -67,6 +80,12 @@ describe('Public methods', () => {
       const town = ecuador.data.lookupTowns('TARQUI');
 
       expect(town.length).to.be.equals(4);
+    });
+
+    it('Search for a invalid town from country', () => {
+      const town = ecuador.data.lookupTowns('XXXX');
+
+      expect(town.length).to.be.equals(0);
     });
   });
 
@@ -88,9 +107,21 @@ describe('Public methods', () => {
 
   describe('Postal code checking', () => {
     it('Iñaquito postal code should be 170112', () => {
-      const town = ecuador.data.lookupTowns('Iñaquito');
+      const town = ecuador.data.lookupTowns('Iñaquito')[0];
 
-      expect(town[0].postalCode).to.be.equals('170112');
+      expect(town.postalCode).to.be.equals('170112');
+    });
+
+    it('Search for 170112 should return Iñaquito', () => {
+      const town = ecuador.data.lookupPostalCode('170112');
+
+      expect(town.name).to.be.equals('IÑAQUITO');
+    });
+
+    it('Search for invalid postal code', () => {
+      const town = ecuador.data.lookupPostalCode('xxxx');
+
+      expect(town).to.be.null;
     });
   });
 });
