@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/po5i/ecuador-postal-codes.svg?branch=master)](https://travis-ci.org/po5i/ecuador-postal-codes)
+
 # ecuador-postal-codes
 A Node.js module to fetch and query postal codes from Ecuador.
 
