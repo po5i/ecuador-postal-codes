@@ -1,6 +1,6 @@
 {
   "name": "ecuador-postal-codes",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Library with Ecuador postal codes",
   "main": "lib/index.js",
   "scripts": {

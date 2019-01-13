@@ -105,6 +105,25 @@ describe('Public methods', () => {
     });
   });
 
+  describe.only('Returned generators', () => {
+    it('Guayas cities should starts with Guayaquil', () => {
+      const province = ecuador.data.lookupProvinces('GUAYAS')[0];
+      const cities = province.citiesGenerator();
+
+      expect(cities.next()).to.have.nested.property('value.name', 'GUAYAQUIL');
+      cities.next();
+      expect(cities.next()).to.have.nested.property('value.name', 'BALAO');
+    });
+
+    it('Quito towns should starts with Belisario Quevedo and Carcelén', () => {
+      const city = ecuador.data.lookupCities('Quito')[0];
+      const towns = city.townsGenerator();
+
+      expect(towns.next()).to.have.nested.property('value.name', 'BELISARIO QUEVEDO');
+      expect(towns.next()).to.have.nested.property('value.name', 'CARCELÉN');
+    });
+  });
+
   describe('Postal code checking', () => {
     it('Iñaquito postal code should be 170112', () => {
       const town = ecuador.data.lookupTowns('Iñaquito')[0];
