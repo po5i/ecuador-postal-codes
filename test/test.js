@@ -77,9 +77,12 @@ describe('Public methods', () => {
     });
 
     it('Search for a Tarqui town from country', () => {
-      const town = ecuador.data.lookupTowns('TARQUI');
+      const towns = ecuador.data.lookupTowns('TARQUI');
+      const flatTowns = towns.map(town => town.name);
 
-      expect(town.length).to.be.equals(4);
+      expect(towns.length).to.be.equals(5);
+      expect(flatTowns).to.includes('TARQUI');
+      expect(flatTowns).to.includes('NUEVA TARQUI');
     });
 
     it('Search for a invalid town from country', () => {
@@ -105,7 +108,7 @@ describe('Public methods', () => {
     });
   });
 
-  describe.only('Returned generators', () => {
+  describe('Returned generators', () => {
     it('Guayas cities should starts with Guayaquil', () => {
       const province = ecuador.data.lookupProvinces('GUAYAS')[0];
       const cities = province.citiesGenerator();
