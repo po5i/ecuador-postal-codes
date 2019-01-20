@@ -3,7 +3,7 @@
 # ecuador-postal-codes
 A Node.js module to fetch and query postal codes from Ecuador.
 
-## Installation 
+## Installation
 ```sh
 npm install ecuador-postal-codes --save
 yarn add ecuador-postal-codes
@@ -84,6 +84,11 @@ Clone this repo, NPM-it and run the tests:
 
 ```sh
 npm run test
+```
+
+Be sure all code passes linting rules according to standardjs rules (with added semicolons) (https://standardjs.com/)
+```sh
+npm run lint
 ```
 
 ## Thanks

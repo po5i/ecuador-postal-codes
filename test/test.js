@@ -3,7 +3,6 @@ const { describe, it } = require('mocha');
 
 const ecuador = require('../lib/index');
 
-
 describe('Testing data', () => {
   it('jsonData should have AZUAY province', () => {
     const result = ecuador.jsonData;
@@ -49,14 +48,14 @@ describe('Public methods', () => {
       const province = ecuador.data.lookupProvinces('GUAYAS')[0];
       const city = province.lookupCities('Guayaquil')[0];
 
-      expect(city).to.not.be.null;
+      expect(city).to.not.equal(null);
       expect(city.province).to.have.property('name', 'GUAYAS');
     });
 
     it('Search for a Guayaquil city from country', () => {
       const city = ecuador.data.lookupCities('Guayaquil')[0];
 
-      expect(city).to.not.be.null;
+      expect(city).to.not.equal(null);
       expect(city.province).to.have.property('name', 'GUAYAS');
     });
 
@@ -143,7 +142,7 @@ describe('Public methods', () => {
     it('Search for invalid postal code', () => {
       const town = ecuador.data.lookupPostalCode('xxxx');
 
-      expect(town).to.be.null;
+      expect(town).to.equal(null);
     });
   });
 });
