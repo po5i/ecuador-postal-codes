@@ -1,14 +1,33 @@
-const { expect } = require('chai');
+const chai = require('chai');
 const { describe, it } = require('mocha');
+
+const {
+  expect,
+  Assertion
+} = chai;
 
 const ecuador = require('../lib/index');
 
+chai.use(function (chai, utils) {
+  Assertion.addMethod('validJSONData', function () {
+    new Assertion(this._obj).to.be.instanceof(Object);
+    new Assertion(this._obj).to.have.nested.property('1.provincia', 'AZUAY');
+    
+    Object.keys(this._obj).forEach((provinceKey) => {
+      new Assertion(this._obj[provinceKey]).to.have.property('provincia');
+      new Assertion(this._obj[provinceKey]).to.have.property('cantones');
+
+      Object.keys(this._obj[provinceKey].cantones).forEach((cantonKey) => {
+        new Assertion(this._obj[provinceKey].cantones[cantonKey]).to.have.property('canton');
+        new Assertion(this._obj[provinceKey].cantones[cantonKey]).to.have.property('parroquias');
+      })
+    });
+  });
+});
 
 describe('Testing data', () => {
-  it('jsonData should have AZUAY province', () => {
-    const result = ecuador.jsonData;
-
-    expect(result).to.have.nested.property('1.provincia', 'AZUAY');
+  it('jsonData should comply schema', () => {
+    expect(ecuador.jsonData).to.be.validJSONData();
   });
 
   it('data is consistent', () => {
