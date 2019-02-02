@@ -1,6 +1,9 @@
 {
     "extends": "airbnb-base",
     "rules": {
-        "no-underscore-dangle": ["allowAfterThis"]
+        "no-underscore-dangle": "off",
+        "no-unused-expressions": "off",
+        "no-new-wrappers": "off",
+        "no-bitwise": ["error", { "allow": ["~"] }]
     }
 }

@@ -3,16 +3,16 @@ const { describe, it } = require('mocha');
 
 const {
   expect,
-  Assertion
+  Assertion,
 } = chai;
 
 const ecuador = require('../lib/index');
 
-chai.use(function (chai, utils) {
-  Assertion.addMethod('validJSONData', function () {
+chai.use(() => {
+  Assertion.addMethod('validJSONData', function validJSONData() {
     new Assertion(this._obj).to.be.instanceof(Object);
     new Assertion(this._obj).to.have.nested.property('1.provincia', 'AZUAY');
-    
+
     Object.keys(this._obj).forEach((provinceKey) => {
       new Assertion(this._obj[provinceKey]).to.have.property('provincia');
       new Assertion(this._obj[provinceKey]).to.have.property('cantones');
@@ -20,7 +20,7 @@ chai.use(function (chai, utils) {
       Object.keys(this._obj[provinceKey].cantones).forEach((cantonKey) => {
         new Assertion(this._obj[provinceKey].cantones[cantonKey]).to.have.property('canton');
         new Assertion(this._obj[provinceKey].cantones[cantonKey]).to.have.property('parroquias');
-      })
+      });
     });
   });
 });
